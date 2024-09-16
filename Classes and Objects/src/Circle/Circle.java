@@ -1,3 +1,5 @@
+package Circle;
+
 public class Circle {
     // Declare private instance variables
     private double radius;
@@ -25,3 +27,4 @@ public class Circle {
         this.radius = radius;
     }
 }
+
