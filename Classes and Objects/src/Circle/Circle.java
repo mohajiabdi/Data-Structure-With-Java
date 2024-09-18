@@ -26,5 +26,9 @@ public class Circle {
     public void setRadius(double radius) {
         this.radius = radius;
     }
+
+    public void display(){
+        System.out.println("\nHello World");
+    }
 }
 
