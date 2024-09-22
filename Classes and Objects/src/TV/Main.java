@@ -13,7 +13,9 @@ public class Main {
         tv.volumeUp();
         tv.volumeDown();
 
-        tv.setChannel(140);
+        //tv.setChannel(140);
+
+        tv.channelDown();
         tv.displayStatus();
         tv.mute();
         tv.displayStatus();
