@@ -17,6 +17,18 @@ public class C2 {
        String display =  o.toString(); // can invoke
 
         System.out.println(display);
+
+       // display(); //can not invoke instance method in static method....
+
+        System.out.println("Age is: "+C1.age);
+    }
+
+    public void display(){
+        //try accessing static variable field in c1 class using object
+        //System.out.println(o.age); // can not acccess.... Wrong!!!!
+
+        //this one is the right way
+        System.out.println("Age is: "+C1.age);
     }
 
 }

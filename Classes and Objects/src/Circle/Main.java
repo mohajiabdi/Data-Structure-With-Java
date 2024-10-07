@@ -4,13 +4,25 @@ public class Main {
     public static void main(String[] args) {
 
         // Create a Circle object with radius 5
-        Circle circle = new Circle();
+        Circle c1 = new Circle(3);
+        Circle c2 = new Circle(6);
+        Circle c3 = new Circle();
 
-        // Print the area of the circle
-        circle.setRadius(3);
-        System.out.printf("\nThe area of the circle is %.4f" , circle.getArea());
-        System.out.printf("\nThe Perimeter of the circle is %.4f" , circle.getPerimeter());
+        System.out.println();
+        // Print  circle
+        printCircle(c1);
+        printCircle(c2);
+        printCircle(c3);
 
-        circle.display();
+
+
+
+    }
+
+    public static void printCircle(Circle c){
+        System.out.println("\n----------------------------------------------------");
+        System.out.printf("\nThe area of the circle is %.2f" , c.getArea());
+        System.out.printf("\nThe getRadius of the circle is %.2f" , c.getRadius());
+        System.out.println(c.toString());
     }
 }

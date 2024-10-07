@@ -6,6 +6,7 @@ public class C1 {
     int y;
     private int z;
     private String name;
+    public static int age =25;
 
     //Constructor
 
