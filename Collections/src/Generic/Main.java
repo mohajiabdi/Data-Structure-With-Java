@@ -5,6 +5,6 @@ public class Main {
         Pair<Integer, String> obj = new Pair<>(1,"Two");
 //        System.out.println(obj.getFirst());
 //        System.out.println(obj.getSecond());
-        System.out.println(obj.toString());
+        System.out.println(obj);
     }
 }
