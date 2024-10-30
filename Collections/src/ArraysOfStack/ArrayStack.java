@@ -164,5 +164,40 @@ public class ArrayStack <T> {
 
 
 
+    public ArrayStack<Integer> totalInt1(ArrayStack<Integer> stack1, ArrayStack<Integer> stack2) {
+        if (stack1.Size() != stack2.Size()) {
+            throw new IllegalArgumentException("Both stacks must have the same size");
+        }
+
+        ArrayStack<Integer> result = new ArrayStack<>(stack1.getCapacity());
+        int size = stack1.Size();
+
+        // Create temporary arrays to hold the values before popping
+        Integer[] temp1Array = new Integer[size];
+        Integer[] temp2Array = new Integer[size];
+
+        // Transfer elements to the temporary arrays
+        for (int i = 0; i < size; i++) {
+            temp1Array[i] = stack1.pop();
+            temp2Array[i] = stack2.pop();
+        }
+
+        // Sum the elements from the temporary arrays and push to the result stack
+        for (int i = 0; i < size; i++) {
+            result.push(temp1Array[i] + temp2Array[i]);
+        }
+
+        // Push back the original values into the stacks if needed
+        for (int i = size - 1; i >= 0; i--) {
+            stack1.push(temp1Array[i]);
+            stack2.push(temp2Array[i]);
+        }
+
+        return result;
+    }
+
+
+
+
 
 }

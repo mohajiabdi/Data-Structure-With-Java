@@ -47,14 +47,15 @@ public class Main {
         finale.push(30);
         finale.push(200);
 
-        ArrayStack<Integer> total = midTerm.totalInt(midTerm, finale);
+        ArrayStack<Integer> total = midTerm.totalInt1(midTerm, finale);
 
-        
+
 
 //        for(int i=0; i<total.Size(); i++)
 //        System.out.println(total);
 
         total.display();
+        midTerm.display();
 
         //System.out.println(midTerm.Size());
 
