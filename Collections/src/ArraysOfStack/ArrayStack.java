@@ -1,5 +1,6 @@
 package ArraysOfStack;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ArrayStack <T> {
@@ -115,21 +116,53 @@ public class ArrayStack <T> {
                 element+" is Found \'"+ count+"\' Times");
 }
 
-T[] merge(T[] stack, T[] stack2){
-        //int[] mergedLength = new int[stack.length + stack2.length];
-       // System.arraycopy(stack,0,mergedLength,stack.length,stack2.length);
-merged =(T[]) new Object[stack.length + stack2.length];
-//    System.arraycopy(stack,0,this.stack,0,this.stack.length);
-//    System.arraycopy(stack2,0,this.stack,stack.length,this.stack.length);
-    System.arraycopy(stack,0,merged,0,stack.length);
-    System.arraycopy(stack2,0,merged,stack.length,stack.length);
-    return merged;
+
+
+//    public ArrayStack<Integer> Total(ArrayStack<Integer> stack1, ArrayStack<Integer> stack2) {
+//        if (stack1.top != stack2.top) {
+//            throw new IllegalArgumentException("Both stacks must have the same size");
+//        }
+//
+//        ArrayStack<Integer> result = new ArrayStack<>(stack1.getCapacity());
+//        for (int i = 0; i < stack1.top; i++) {
+//            int mid = (int)stack1.stack[i];
+//            int finale = (int)stack2.stack[i];
+//            result.push(mid + finale);
+//        }
+//
+//        return result;
+//    }
+
+
+    public ArrayStack<Integer> totalInt(ArrayStack<Integer> stack1, ArrayStack<Integer> stack2) {
+        if (stack1.Size() != stack2.Size()) {  // Assume there's a size() method
+            throw new IllegalArgumentException("Both stacks must have the same size");
+        }
+
+        ArrayStack<Integer> result = new ArrayStack<>(stack1.getCapacity());
+        int size = stack1.Size(); // Get the actual size of the stacks
+
+        // Create temporary stacks to preserve the original stacks
+        ArrayStack<Integer> temp1 = new ArrayStack<>(size);
+        ArrayStack<Integer> temp2 = new ArrayStack<>(size);
+
+        // Transfer elements to temporary stacks to avoid modifying the originals
+        for (int i = 0; i < size; i++) {
+            temp1.push(stack1.pop());
+            temp2.push(stack2.pop());
+        }
+
+        // Sum the elements and push to the result stack
+        for (int i = 0; i < size; i++) {
+            int mid = temp1.pop();
+            int finale = temp2.pop();
+            result.push(mid + finale);
+        }
+
+        return result;
     }
 
-    void  fullName(T[] stack, T[]stack2){
-       T[] merged =(T[]) new Object[stack.length + stack2.length];
-        for(int i=0; i <top; i++){
-            System.out.println(stack[i] +" "+stack2[i]);
-        }
-    }
+
+
+
 }
