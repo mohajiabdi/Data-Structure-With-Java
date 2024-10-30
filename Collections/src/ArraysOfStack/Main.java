@@ -47,7 +47,7 @@ public class Main {
         finale.push(30);
         finale.push(200);
 
-        ArrayStack<Integer> total = midTerm.totalInt1(midTerm, finale);
+        ArrayStack<Integer> total = midTerm.totalInt(midTerm, finale);
 
 
 
@@ -57,7 +57,26 @@ public class Main {
         total.display();
         midTerm.display();
 
-        //System.out.println(midTerm.Size());
+
+        ArrayStack firstName = new ArrayStack(4);
+        ArrayStack lastName = new ArrayStack(4);
+
+        firstName.push("Ali");
+        firstName.push("Adan");
+        firstName.push("Asho");
+        firstName.push("Anzal");
+
+        lastName.push("Ahmed");
+        lastName.push("Bashiir");
+        lastName.push("Abdullahi");
+        lastName.push("Asad");
+
+        ArrayStack <String> fullName = firstName.combineNames(firstName,lastName);
+
+
+        fullName.display();
+
+
 
 
     }

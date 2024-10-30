@@ -93,7 +93,7 @@ public class ArrayStack <T> {
     //Display from Top to down
     void display(){
         for(int i=this.top-1; i >= 0; i--){
-            System.out.print(stack[i] + " \t");
+            System.out.print("\"" + stack[i] + "\"\t");
         }
         System.out.println();
     }
@@ -134,7 +134,7 @@ public class ArrayStack <T> {
 //    }
 
 
-    public ArrayStack<Integer> totalInt(ArrayStack<Integer> stack1, ArrayStack<Integer> stack2) {
+    public ArrayStack<Integer> totalInt1(ArrayStack<Integer> stack1, ArrayStack<Integer> stack2) {
         if (stack1.Size() != stack2.Size()) {  // Assume there's a size() method
             throw new IllegalArgumentException("Both stacks must have the same size");
         }
@@ -164,7 +164,7 @@ public class ArrayStack <T> {
 
 
 
-    public ArrayStack<Integer> totalInt1(ArrayStack<Integer> stack1, ArrayStack<Integer> stack2) {
+    public ArrayStack<Integer> totalInt(ArrayStack<Integer> stack1, ArrayStack<Integer> stack2) {
         if (stack1.Size() != stack2.Size()) {
             throw new IllegalArgumentException("Both stacks must have the same size");
         }
@@ -195,6 +195,40 @@ public class ArrayStack <T> {
 
         return result;
     }
+
+
+    public ArrayStack<String> combineNames(ArrayStack<String> firstNames, ArrayStack<String> lastNames) {
+        if (firstNames.Size() != lastNames.Size()) {
+            throw new IllegalArgumentException("Both stacks must have the same size");
+        }
+
+        ArrayStack<String> result = new ArrayStack<>(firstNames.getCapacity());
+        int size = firstNames.Size();
+
+        // Create temporary arrays to hold the values before popping
+        String[] firstNameArray = new String[size];
+        String[] lastNameArray = new String[size];
+
+        // Transfer elements to the temporary arrays
+        for (int i = 0; i < size; i++) {
+            firstNameArray[i] = firstNames.pop();
+            lastNameArray[i] = lastNames.pop();
+        }
+
+        // Combine the names from the temporary arrays and push to the result stack
+        for (int i = 0; i < size; i++) {
+            result.push(firstNameArray[i] + " " + lastNameArray[i]);
+        }
+
+        // Push back the original values into the stacks
+        for (int i = size - 1; i >= 0; i--) {
+            firstNames.push(firstNameArray[i]);
+            lastNames.push(lastNameArray[i]);
+        }
+
+        return result;
+    }
+
 
 
 
