@@ -70,4 +70,35 @@ public class LinkedStack <T> {
         return top.getElement();
     }
 
+
+    public void retainFirstAndLast() throws EmptyStackException {
+        // If the stack has 2 or fewer elements, do nothing
+        if (count <= 2) {
+
+            System.out.println("\nThere are Less than 3 elements in the stack");
+            return;
+        }
+
+        // Pop the first element and store it
+        T firstElement = pop();
+
+        // Create a temporary stack to hold the elements between first and last
+        LinkedStack<T> tempStack = new LinkedStack<>();
+
+        // Pop and push elements to tempStack until only one element remains
+        while (count > 1) {
+            tempStack.push(pop());
+        }
+
+        // Pop the last element and store it
+        T lastElement = pop();
+
+        // Push the last element back onto the original stack
+        push(lastElement);
+
+        // Push the first element back onto the original stack
+        push(firstElement);
+    }
+
+
 }
