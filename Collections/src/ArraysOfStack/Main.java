@@ -42,10 +42,12 @@ public class Main {
         midTerm.push(30);
         midTerm.push(800);
         midTerm.push(25);
+        midTerm.push(10);
 
         finale.push(400);
         finale.push(30);
         finale.push(200);
+        finale.push(300);
 
         ArrayStack<Integer> total = midTerm.totalInt(midTerm, finale);
 
