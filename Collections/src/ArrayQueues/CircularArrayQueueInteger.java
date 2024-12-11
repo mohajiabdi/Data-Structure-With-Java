@@ -4,34 +4,32 @@ import java.util.Arrays;
 import java.util.EmptyStackException;
 import java.util.Stack;
 
-public class CircularArrayQueue <T> {
+public class CircularArrayQueueInteger {
     //Data Fileds for all methods
     private static final int DEFAULT_CAPACITY = 2;  // Default capacity of queue
     private int front, rear, counter;
-    private T[] queue;
+    private int[] queue;
 
     // Variables for Search Methods
     String indexes;
     int times;
 
-
-    //constructors
-//    public CircularArrayQueue(int capacity){
-//        queue = (T[]) new Object[capacity];
-//        front = rear = -1;
-//        counter = 0;
-//    }
-    public CircularArrayQueue(int capacity){
-        queue = (T[]) new Object[capacity];
+    // Constructors
+    public CircularArrayQueueInteger(int capacity){
+        queue = new int[capacity];
         front = rear = counter = 0;
     }
 
-    public CircularArrayQueue(){
+    public CircularArrayQueueInteger(){
         this(DEFAULT_CAPACITY);
     }
 
-    //Methods
 
+    //----------------------------------------------------------------
+
+
+
+    // Methods
     // isEmpty
     public boolean isEmpty(){
         return counter == 0;
@@ -48,7 +46,7 @@ public class CircularArrayQueue <T> {
     }
 
     // first element
-    public T first() throws EmptyStackException{
+    public int first() throws EmptyStackException {
         if(isEmpty()){
             throw new EmptyStackException();
         }
@@ -56,7 +54,7 @@ public class CircularArrayQueue <T> {
     }
 
     // last element
-    public T last() throws EmptyStackException{
+    public int last() throws EmptyStackException{
         if(isEmpty()){
             throw new EmptyStackException();
         }
@@ -66,7 +64,7 @@ public class CircularArrayQueue <T> {
 
     // expand Capacity
     private void expandCapacity(){
-        T[] larger = (T[]) new Object[queue.length *2];
+        int[] larger = new int[queue.length *2];
         for (int scan = 0; scan < counter; scan++){
             larger[scan] = queue[front];
             front = (front + 1) % queue.length;
@@ -76,8 +74,9 @@ public class CircularArrayQueue <T> {
         queue = larger;
     }
 
-   //enqueue
-    public void enqueue(T element){
+
+
+    public void enqueue(int element){
         if (size() == queue.length){
             expandCapacity();
         }
@@ -88,12 +87,12 @@ public class CircularArrayQueue <T> {
 
 
     // dequeue
-    public T dequeue() throws EmptyStackException {
+    public int dequeue() throws EmptyStackException {
         if(isEmpty()){
             throw new EmptyStackException();
         }
-        T result = queue[front];
-        queue[front] = null;
+        int result = queue[front];
+        queue[front] = 0;
         front = (front + 1) % queue.length;
         counter--;
 
@@ -123,7 +122,7 @@ public class CircularArrayQueue <T> {
     }
 
     // Search Element
-    public void search(T element){
+    public void search(int element){
         indexes = "";
         times = 0;
         if(isEmpty()){
@@ -132,7 +131,7 @@ public class CircularArrayQueue <T> {
         }
         int index = front;
         for(int  i=0; i<counter; i++){
-            if(element.equals(queue[index])){
+            if(element == (queue[index])){
                 times++;
                 indexes += index + ", ";
             }
@@ -146,6 +145,7 @@ public class CircularArrayQueue <T> {
         }
     }
 
+
     // Extra Methods to try
     // Reverse the order of the elements
 //
@@ -155,7 +155,7 @@ public class CircularArrayQueue <T> {
         if(isEmpty()){
             throw new EmptyStackException();
         }
-        Stack<T> stack = new Stack<T>();
+        Stack<Integer> stack = new Stack<>();
 
 
         //Deque All Elements
@@ -181,7 +181,7 @@ public class CircularArrayQueue <T> {
 
         for(int i = 0; i< counter /2; i++) {
             // Swap queue[start] with queue[end]
-            T temp = queue[start];
+            int temp = queue[start];
             queue[start] = queue[end];
             queue[end] = temp;
 
@@ -192,27 +192,27 @@ public class CircularArrayQueue <T> {
     }
 
     // find max
-    public T findMax()throws EmptyStackException {
+    public int findMax()throws EmptyStackException {
         if(isEmpty()){
             throw new EmptyStackException();
         }
-        T max = queue[front];
+        int max = queue[front];
         int index = front;
         for(int i = 0; i < counter; i++) {
-            if(((Comparable<T>) queue[index]).compareTo(max) > 0){
+            if(((Comparable<Integer>) queue[index]).compareTo(max) > 0){
                 max = queue[index];  //Update max if larger Element is found....
             }
             index = (index + 1) % queue.length;
         }
         return max;
-    }public T findMin()throws EmptyStackException {
+    }public int findMin()throws EmptyStackException {
         if(isEmpty()){
             throw new EmptyStackException();
         }
-        T min = queue[front];
+        int min = queue[front];
         int index = front;
         for(int i = 0; i < counter; i++) {
-            if(((Comparable<T>) queue[index]).compareTo(min) < 0){
+            if(((Comparable<Integer>) queue[index]).compareTo(min) < 0){
                 min = queue[index];  //Update max if larger Element is found....
             }
             index = (index + 1) % queue.length;
@@ -224,7 +224,8 @@ public class CircularArrayQueue <T> {
     // CLear Array Queue
     public void clearQueue(){
         front = counter = rear = 0;
-        Arrays.fill(queue, null);
+        Arrays.fill(queue, 0);
+        queue = new int[DEFAULT_CAPACITY];
         System.out.println("\nQueue Cleared!!");
     }
 
@@ -236,7 +237,7 @@ public class CircularArrayQueue <T> {
         int rearIndex = (front + counter -1) % queue.length; // Logical Rear "Kii uga danbeeyay aan soo galiyay!"
 
         for(int i = 0; i < counter/2; i++){
-            if(!queue[frontIndex].equals(queue[rearIndex])){
+            if(queue[frontIndex] != (queue[rearIndex])){
                 return false;
             }
             frontIndex = (frontIndex + 1) % queue.length;
@@ -249,53 +250,30 @@ public class CircularArrayQueue <T> {
 
 
 
-    // Main
-
+    // Main Method
     public static void main(String[] args) {
-        CircularArrayQueue<String> names = new CircularArrayQueue<>();
-        CircularArrayQueue<Integer> values = new CircularArrayQueue<>();
-
-        names.enqueue("Abdi");
-        names.enqueue("Bashiir");
-//        names.enqueue("Halimo");
-//        System.out.println(names);
-        names.enqueue("Dahir");
-//        System.out.println(names);
-//        System.out.println("Removed: "+names.dequeue());
-//        System.out.println(names);
-        names.enqueue("Halimo");
-        names.enqueue("Shayma Abdulahi");
-//        System.out.println(names);
-//        System.out.println(names.dequeue());
-//        System.out.println(names);
-
-//        names.reverseUsingStack();
-//        names.reverseArrayQueue();
-//        System.out.println(names);
+        CircularArrayQueueInteger numbers = new CircularArrayQueueInteger();
 
 
-//        System.out.println(names.first());
-//        System.out.println(names.last());
+        numbers.enqueue(1);
+        numbers.enqueue(2);
+        numbers.enqueue(3);
+        numbers.enqueue(2);
+        numbers.enqueue(1);
 
-//        names.search("Halimoo");
-
-//        System.out.println(names.findMax());
-//        System.out.println(names.findMin());
-
-        names.printQueue();
-        names.clearQueue();
-        names.printQueue();
+        System.out.println(numbers.isPalindrome());
         System.out.println();
 
+        numbers.printQueue();
+        System.out.println(numbers);
+        System.out.println("Maximum is: " + numbers.findMax());
+        System.out.println("Minimum is: " + numbers.findMin());
 
-        //---------------------------------------------------------
-
-        values.enqueue(11);
-        values.enqueue(22);
-        values.enqueue(33);
-        values.enqueue(22);
-        values.enqueue(11);
-
-        System.out.println(values.isPalindrome());
+        numbers.clearQueue();
+        numbers.printQueue();
+        System.out.println(numbers);
     }
+
+
+
 }
