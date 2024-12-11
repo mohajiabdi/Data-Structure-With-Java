@@ -3,6 +3,8 @@ package LinkedQueues;
 import LinkedList.Node;
 
 import java.util.EmptyStackException;
+import java.util.Queue;
+import java.util.Stack;
 
 public class LinkedQueue <T>{
     private Node<T> head;
@@ -65,26 +67,65 @@ public class LinkedQueue <T>{
     }
 
 
-    public void display() {
+    public StringBuffer display() {
       StringBuffer name = new StringBuffer();
       Node<T> current = head;
       while(current != null) {
           name.append(current.getElement()).append("\n");
           current = current.getNext();
       }
+      return name;
     }
+
+    //------------------------------------------------
+
+    public LinkedQueue<T> reverseQueue(LinkedQueue<T> orginalQueue) {
+        Stack<T> stack = new Stack<>();
+
+        // Push all elements of the original queue into stack
+        while(!orginalQueue.isEmpty()) {
+            stack.push(orginalQueue.dequeue());
+        }
+
+        LinkedQueue<T> reversedQueue = new LinkedQueue<>();
+
+        // Push all elements of stack back into reversedQueue
+        while(!stack.isEmpty()) {
+            reversedQueue.enqueue(stack.pop());
+            orginalQueue.enqueue(reversedQueue.dequeue());
+        }
+
+
+        return orginalQueue;
+    }
+// Deep copy
+    public LinkedQueue<T> copy(LinkedQueue<T> sourceQueue) {
+        LinkedQueue<T> result = new LinkedQueue<>();
+        Node<T> current = sourceQueue.head;
+        while(current!= null) {
+            result.enqueue(current.getElement());
+            current = current.getNext();
+        }
+        return result;
+    }
+
+
 
 // Main mehtod
 
     public static void main(String[] args){
         LinkedQueue<String> names = new LinkedQueue<>();
+        LinkedQueue<String> newNames = new LinkedQueue<>();
         names.enqueue("ALi");
         names.enqueue("Asho");
         names.enqueue("Adan");
         names.enqueue("Ahmed");
         names.enqueue("Anzal");
 
-
-        names.printQueue();
+        newNames = names.copy(names);
+        names.reverseQueue(names);
+//        names.printQueue();
+        newNames.printQueue();
+//        System.out.println( names.display());
     }
 }
